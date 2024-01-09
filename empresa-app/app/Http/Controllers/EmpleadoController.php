@@ -12,7 +12,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+       $empleados = Empleado::all();
+       return view('empleados',['titulo' => 'Listado de empleados', 'empleados' => $empleados]);
     }
 
     /**
@@ -60,6 +61,8 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        //
+        Empleado::destroy($empleado);
+        return redirect()->route('empleados.index');
     }
+
 }
