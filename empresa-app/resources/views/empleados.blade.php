@@ -7,6 +7,7 @@
 </head>
 <body>
     <h2>{{ $titulo }}</h2>
+    <p><button type="button"><a href="/empleados/create">Miracomova</a></button></p>
     <table>
     @foreach($empleados as $empleado)
     <tr>

@@ -8,7 +8,7 @@
 <body>
     <h2>{{ $titulo }}</h2>
 
-    <form action="/empleados/{{ $empleado->id }}/update" method="post">
+    <form action="/empleados/{{ $empleado->id }}" method="post">
         @csrf
         <p>Nombre: <input type="text" name="nombre" id="" value="{{ $empleado->nombre }}"></p>
         <p>Email: <input type="text" name="email" id="" value="{{ $empleado->email }}"></p>

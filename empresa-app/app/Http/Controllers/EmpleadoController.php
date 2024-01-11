@@ -84,4 +84,10 @@ class EmpleadoController extends Controller
         return redirect()->route('empleados.index');
     }
 
+    public function prueba($id) {
+        echo $id;
+        $empleado_completo = Empleado::where('id', $id)->first();
+        echo $empleado_completo->nombre;
+    }
+
 }

@@ -19,6 +19,20 @@ Route::get('/', function () {
 });
 
 //Route::get('/empleados', [EmpleadoController::class, 'index']);
-Route::post('/empleados/{empleado}/update', [EmpleadoController::class, 'update']);
+Route::post('/empleados/{empleado}', [EmpleadoController::class, 'update']);
 Route::resource('/empleados', EmpleadoController::class);
+
+/*
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return "ADMIN";
+    });
+    Route::get("/prueba/{id}", [EmpleadoController::class, 'prueba'])->where(['id' => '[0-9]+'])->name('miprueba');
+
+});
+
+Route::get("/miracomova/{id}", [EmpleadoController::class, 'prueba']);
+*/
+
+
 
