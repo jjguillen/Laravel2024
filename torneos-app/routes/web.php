@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [TorneoController::class, 'index'])->middleware(['auth', 'verified', 'mdrol:admin'])->name('dashboard');
 Route::get('/logout',[AuthenticatedSessionController::class, 'destroy'])->name('milogout');
+Route::get('/usuarios', [ProfileController::class, 'index'])->middleware(['auth', 'verified', 'mdrol:admin'])->name('usuarios');
 
 Route::get('/torneos/{id}', [TorneoController::class, 'show']);
 
