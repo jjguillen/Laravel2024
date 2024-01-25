@@ -4,6 +4,9 @@
         USUARIOS
     </x-slot>
 
+    <x-slot name="nuevo">
+    #
+    </x-slot>
 
     <x-table>
         <x-slot name="tcabecera">

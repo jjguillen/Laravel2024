@@ -21,7 +21,7 @@ class JuegoController extends Controller
      */
     public function create()
     {
-        echo "Formulario de crear juego";
+        return view('juegos.create');
     }
 
     /**
@@ -29,7 +29,19 @@ class JuegoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|max:30|unique:juegos',
+            'edadR' => 'required|digits_between:1,2',
+        ]);
+
+        $juego = new Juego();
+        $juego->nombre = $request->nombre;
+        $juego->plataforma = $request->plataforma;
+        $juego->edadR = $request->edadR;
+        $juego->nota = $request->nota;
+        $juego->save();
+
+        return redirect()->route('juegos.index');
     }
 
     /**
