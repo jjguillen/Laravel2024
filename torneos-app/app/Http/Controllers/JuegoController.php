@@ -12,7 +12,8 @@ class JuegoController extends Controller
      */
     public function index()
     {
-        //
+        $juegos = Juego::paginate(5);
+        return view('juegos', ['juegos' => $juegos]);
     }
 
     /**
@@ -20,7 +21,7 @@ class JuegoController extends Controller
      */
     public function create()
     {
-        //
+        echo "Formulario de crear juego";
     }
 
     /**

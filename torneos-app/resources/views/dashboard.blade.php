@@ -4,6 +4,9 @@
         TORNEOS
     </x-slot>
 
+    <x-slot name="nuevo">
+        {{ route('torneos.create') }}
+    </x-slot>
 
     <x-table>
         <x-slot name="tcabecera">

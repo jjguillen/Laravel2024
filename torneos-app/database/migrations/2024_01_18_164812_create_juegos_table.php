@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('plataforma');
-            $table->integer('edad');
+            $table->integer('edadR');
+            $table->double('nota');
             $table->timestamps();
         });
     }
