@@ -20,7 +20,7 @@ use App\Http\Controllers\JuegoController;
 
 //RUTAS WEB
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('web.torneos');
 });
 
 
@@ -42,5 +42,9 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'mdrol:admin'])->group(f
     Route::resource('/juegos', JuegoController::class);
 });
 
+//RUTAS WEB
+Route::prefix('gameplace')->group(function () {
+    Route::get('/torneos', [TorneoController::class, 'index_web'])->name('web.torneos');
+});
 
 require __DIR__ . '/auth.php';
