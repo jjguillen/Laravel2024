@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Torneo;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class TorneoController extends Controller
 {
@@ -17,7 +18,7 @@ class TorneoController extends Controller
 
     public function index_web(): View
     {
-        $torneos = Torneo::whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->paginate(5);
+        $torneos = Torneo::whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->get();
         return view('web.torneos', ['torneos' => $torneos]);
     }
 
@@ -37,13 +38,19 @@ class TorneoController extends Controller
         $torneo->maxParticipantes = $request->maxParticipantes;
         $torneo->save();
 
+        //SUBIR IMAGEN
+        $id = $torneo->id;
+        $request->file('imagen')->storeAs(
+            'public',
+            'torneo_' . $id . '.jpg'
+        );
+
         return redirect()->route('dashboard');
     }
 
-    public function show($id) 
+    public function show($id)
     {
-        echo $id;
+        $torneo = Torneo::find($id);
+        return view('web.torneo_detalle', ['torneo' => $torneo]);
     }
-
-
 }

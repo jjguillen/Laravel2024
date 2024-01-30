@@ -22,7 +22,8 @@ class TorneoFactory extends Factory
             'fechaInicio' => $this->faker->dateTimeBetween('+1 week', '+4 week'),
             'premio1' => $this->faker->randomNumber(5, true),
             'premio2' => $this->faker->randomNumber(4, true),
-            'maxParticipantes' => $this->faker->numberBetween(10, 50)
+            'maxParticipantes' => $this->faker->numberBetween(10, 50),
+            'juego_id' => $this->faker->numberBetween(1, 10)
         ];
     }
 }

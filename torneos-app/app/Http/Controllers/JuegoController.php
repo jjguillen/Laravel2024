@@ -16,6 +16,12 @@ class JuegoController extends Controller
         return view('juegos', ['juegos' => $juegos]);
     }
 
+    public function index_web()
+    {
+        $juegos = Juego::paginate(5);
+        return view('web.juegos', ['juegos' => $juegos]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -41,6 +47,13 @@ class JuegoController extends Controller
         $juego->nota = $request->nota;
         $juego->save();
 
+        //SUBIR IMAGEN
+        $id = $juego->id;
+        $request->file('imagen')->storeAs(
+            'public',
+            'juego_' . $id . '.jpg'
+        );
+
         return redirect()->route('juegos.index');
     }
 
@@ -49,7 +62,11 @@ class JuegoController extends Controller
      */
     public function show(Juego $juego)
     {
-        echo $juego;
+    }
+
+    public function show_web(Juego $juego)
+    {
+        return view('web.juego_detalle', ['juego' => $juego]);
     }
 
     /**

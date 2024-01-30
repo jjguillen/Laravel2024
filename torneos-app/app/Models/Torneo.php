@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Juego;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Torneo extends Model
 {
@@ -17,4 +20,9 @@ class Torneo extends Model
         'premio2',
         'maxParticipantes'
     ];
+
+    public function juego(): BelongsTo
+    {
+        return $this->belongsTo(Juego::class);
+    }
 }

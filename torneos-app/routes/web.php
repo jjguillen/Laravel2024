@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/logout',[AuthenticatedSessionController::class, 'destroy'])->name('milogout');
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('milogout');
 
 
 //RUTAS ADMIN
@@ -45,6 +45,9 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'mdrol:admin'])->group(f
 //RUTAS WEB
 Route::prefix('gameplace')->group(function () {
     Route::get('/torneos', [TorneoController::class, 'index_web'])->name('web.torneos');
+    Route::get('/torneos/{id}', [TorneoController::class, 'show'])->name('web.torneos_detalle');
+    Route::get('/juegos', [JuegoController::class, 'index_web'])->name('web.juegos');
+    Route::get('/juegos/{juego}', [JuegoController::class, 'show_web'])->name('web.juegos_detalle');
 });
 
 require __DIR__ . '/auth.php';
