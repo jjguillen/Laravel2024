@@ -14,7 +14,7 @@
             </x-slot>
             <x-slot name="descripcion">
 
-                <p>Juego: {{ $torneo->juego()->get() }}</p>
+                <p>Juego: {{ $torneo->juego->nombre }}</p>
                 <p>Fecha inicio: {{ $torneo->fechaInicio }}</p>
                 <p>Primer premio: {{ $torneo->premio1 }}€</p>
                 <p>Segundo premio: {{ $torneo->premio2 }}€</p>

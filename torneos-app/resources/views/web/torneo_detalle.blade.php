@@ -9,7 +9,7 @@
             {{ $torneo->fechaInicio }}
         </x-slot>
         <x-slot name='juego'>
-            {{ $torneo->juego }}
+            {{ $torneo->juego->nombre }}
         </x-slot>
         <x-slot name='imagen'>
             {{ asset('storage/torneo_' . $torneo->id . '.jpg') }}

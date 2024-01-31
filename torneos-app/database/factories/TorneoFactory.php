@@ -18,7 +18,6 @@ class TorneoFactory extends Factory
     {
         return [
             'nombre' => 'Torneo ' . $this->faker->text($maxNbChars = 10),
-            'juego' => $this->faker->text($maxNbChars = 100),
             'fechaInicio' => $this->faker->dateTimeBetween('+1 week', '+4 week'),
             'premio1' => $this->faker->randomNumber(5, true),
             'premio2' => $this->faker->randomNumber(4, true),
