@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Torneo;
+use App\Models\Juego;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class TorneoController extends Controller
 {
@@ -24,14 +26,15 @@ class TorneoController extends Controller
 
     public function create()
     {
-        return view('torneos.create');
+        $juegos = Juego::all();
+        return view('torneos.create', ["juegos" => $juegos]);
     }
 
     public function store(Request $request)
     {
         $torneo = new Torneo();
         $torneo->nombre = $request->nombre;
-        $torneo->juego = $request->juego;
+        $torneo->juego_id = $request->juego;
         $torneo->fechaInicio = $request->fechaInicio;
         $torneo->premio1 = $request->premio1;
         $torneo->premio2 = $request->premio2;
@@ -52,5 +55,17 @@ class TorneoController extends Controller
     {
         $torneo = Torneo::find($id);
         return view('web.torneo_detalle', ['torneo' => $torneo]);
+    }
+
+    public function inscribirse($torneoId) {
+        $user = Auth::user();
+        $torneo = Torneo::find($torneoId);
+
+        //Comprobamos que no esté ya inscrito
+        if (!$torneo->inscritos()->where('user_id', $user->id)->exists()) {
+            $torneo->inscritos()->attach($user->id, ['nivel' => 5]);
+        } //Sino no hacemos nada
+        
+        return redirect()->route('web.torneos_detalle', [ 'id' => $torneoId]);
     }
 }

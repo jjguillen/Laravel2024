@@ -33,11 +33,13 @@
                             Torneos
                         </a>
                     </li>
+                    @auth
                     <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                        <a href="#" class="flex items-center transition-colors hover:text-blue-500">
+                        <a href="{{ route('web.inscripciones')}}" class="flex items-center transition-colors hover:text-blue-500">
                             Inscripciones
                         </a>
                     </li>
+                    @endauth
                     <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                         @auth
                             @if (Auth::user()->rol == 'admin')

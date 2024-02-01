@@ -48,6 +48,8 @@ Route::prefix('gameplace')->group(function () {
     Route::get('/torneos/{id}', [TorneoController::class, 'show'])->name('web.torneos_detalle');
     Route::get('/juegos', [JuegoController::class, 'index_web'])->name('web.juegos');
     Route::get('/juegos/{juego}', [JuegoController::class, 'show_web'])->name('web.juegos_detalle');
+    Route::get('/inscripciones', [ProfileController::class, 'inscripciones'])->name('web.inscripciones');
+    Route::get('/inscribirse/{torneoId}', [TorneoController::class, 'inscribirse'])->name('web.inscribirse');
 });
 
 require __DIR__ . '/auth.php';

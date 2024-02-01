@@ -21,7 +21,7 @@
         @foreach ($torneos as $torneo)
                 <tr>
                     <x-table.td>{{ $torneo->nombre }}</x-table.td>
-                    <x-table.td>{{ $torneo->juego }}</x-table.td>
+                    <x-table.td>{{ $torneo->juego->nombre }}</x-table.td>
                     <x-table.td>{{ $torneo->fechaInicio }}</x-table.td>
                     <x-table.td>{{ $torneo->premio1 }}</x-table.td>
                     <x-table.td>{{ $torneo->premio2 }}</x-table.td>

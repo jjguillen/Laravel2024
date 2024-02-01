@@ -23,8 +23,12 @@
             <!-- Juego -->
             <div class="mt-4">
                 <x-input-label for="juego" :value="__('Juego')" />
-                <x-text-input id="juego" class="block mt-1 w-full" type="text" name="juego" :value="old('juego')"
-                    required autofocus autocomplete="juego" />
+                <x-select-input id="juego" class="block mt-1 w-full" type="select" name="juego" :value="old('juego')"
+                    required autofocus autocomplete="juego">
+                    @foreach($juegos as $juego)
+                        <option value="{{ $juego->id }}">{{ $juego->nombre }}</option>
+                    @endforeach
+                </x-select-input>
                 <x-input-error :messages="$errors->get('juego')" class="mt-2" />
             </div>
 

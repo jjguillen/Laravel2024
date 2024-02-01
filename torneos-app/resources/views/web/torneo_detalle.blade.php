@@ -19,8 +19,21 @@
         <p>Segundo premio: {{ $torneo->premio2 }}€</p>
         <p>Máximo de participantes: {{ $torneo->maxParticipantes }}</p>
 
-        <x-slot name='boton'>
-            Inscribirse
-        </x-slot>
+        @auth
+            <x-slot name='boton'>
+                Inscribirse
+            </x-slot>
+            <x-slot name='rutaInscripcion'>
+                {{ route('web.inscribirse', ['torneoId' => $torneo->id]) }}
+            </x-slot>
+
+            <x-slot name='inscritos'>
+                @foreach($torneo->inscritos as $usuario)
+                    <li>
+                        {{ $usuario->email }} - {{ $usuario->pivot->nivel }}
+                    </li>
+                @endforeach
+            </x-slot>
+        @endauth
     </x-detalle>
 </x-web-layout>
