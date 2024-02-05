@@ -20,7 +20,7 @@ class TorneoController extends Controller
 
     public function index_web(): View
     {
-        $torneos = Torneo::whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->get();
+        $torneos = Torneo::with('Juego')->whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->get();
         return view('web.torneos', ['torneos' => $torneos]);
     }
 
