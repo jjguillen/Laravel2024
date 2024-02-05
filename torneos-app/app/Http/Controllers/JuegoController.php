@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Juego;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JuegoController extends Controller
 {
@@ -95,6 +96,12 @@ class JuegoController extends Controller
 
     public function filtrar(Request $request)
     {
-        echo "Filtrando..." . $request->filtro;
+        $filtro = $request->filtro;
+        $juegos = DB::table('juegos')
+                    ->where('nombre', 'like', '%'.$filtro.'%')
+                    ->orWhere('plataforma', 'like', '%'.$filtro.'%')
+                    ->paginate(5);
+
+        return view('web.juegos', ['juegos' => $juegos]);
     }
 }

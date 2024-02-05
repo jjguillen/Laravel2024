@@ -9,6 +9,9 @@ use App\Models\Juego;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+
 
 class TorneoController extends Controller
 {
@@ -67,5 +70,15 @@ class TorneoController extends Controller
         } //Sino no hacemos nada
         
         return redirect()->route('web.torneos_detalle', [ 'id' => $torneoId]);
+    }
+
+    public function filtrar(Request $request)
+    {
+        $filtro = $request->filtro;
+        $torneos = Torneo::with('Juego')
+                    ->where('nombre', 'like', '%'.$filtro.'%')
+                    ->get();
+
+        return view('web.torneos', ['torneos' => $torneos]);
     }
 }

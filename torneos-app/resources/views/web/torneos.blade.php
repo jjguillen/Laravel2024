@@ -4,6 +4,16 @@
         TORNEOS MÁS RECIENTES
     </x-slot>
 
+    <x-slot name="filtro">
+        <form action="{{ route('web.filtrar_torneos') }}" method="get">
+            @csrf
+            <x-input-label for="filtro" :value="__('Filtro de búsqueda')" />
+            <x-text-input id="filtro" name="filtro" type="text" class="mt-2 px-2 py-2" :value="old('filtro')"
+                required autofocus autocomplete="filtro" />
+            <x-button-submit class='mb-1'>Buscar</x-button-submit>
+        </form>
+    </x-slot>
+
     @foreach ($torneos as $torneo)
         <x-card>
             <x-slot name="titulo">

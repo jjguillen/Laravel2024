@@ -50,7 +50,8 @@ Route::prefix('gameplace')->group(function () {
     Route::get('/juegos/{juego}', [JuegoController::class, 'show_web'])->name('web.juegos_detalle');
     Route::get('/inscripciones', [ProfileController::class, 'inscripciones'])->name('web.inscripciones');
     Route::get('/inscribirse/{torneoId}', [TorneoController::class, 'inscribirse'])->name('web.inscribirse');
-    Route::get('/juegos/filtrar/filtro', [JuegoController::class, 'filtrar'])->name('web.filtrar_juegos');
+    Route::get('/filtrar/juego', [JuegoController::class, 'filtrar'])->name('web.filtrar_juegos');
+    Route::get('/filtrar/torneo', [TorneoController::class, 'filtrar'])->name('web.filtrar_torneos');
 });
 
 require __DIR__ . '/auth.php';
