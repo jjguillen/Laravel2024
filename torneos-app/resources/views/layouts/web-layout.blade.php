@@ -34,11 +34,12 @@
                         </a>
                     </li>
                     @auth
-                    <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                        <a href="{{ route('web.inscripciones')}}" class="flex items-center transition-colors hover:text-blue-500">
-                            Inscripciones
-                        </a>
-                    </li>
+                        <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                            <a href="{{ route('web.inscripciones') }}"
+                                class="flex items-center transition-colors hover:text-blue-500">
+                                Inscripciones
+                            </a>
+                        </li>
                     @endauth
                     <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
                         @auth
@@ -84,6 +85,12 @@
             class="block antialiased tracking-normal py-3 px-3 font-sans text-4xl font-semibold leading-[1.3] leading-relaxed text-blue-gray-900">
             {{ $titulo }}
         </h2>
+        <div
+            class=" my-5 px-3 flex-wrap relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
+            @if (isset($filtro))
+                {{ $filtro }}
+            @endif
+        </div>
         <div class="flex h-full flex-wrap">
             {{ $slot }}
         </div>

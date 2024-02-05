@@ -92,4 +92,9 @@ class JuegoController extends Controller
     {
         //
     }
+
+    public function filtrar(Request $request)
+    {
+        echo "Filtrando..." . $request->filtro;
+    }
 }
