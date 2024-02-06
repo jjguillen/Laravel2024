@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('premio1');
             $table->integer('premio2');
             $table->integer('maxParticipantes');
-            $table->unsignedBigInteger('juego_id');
+            $table->unsignedBigInteger('juego_id')->nullable();
             $table->foreign('juego_id')->references('id')->on('juegos');
             $table->timestamps();
         });

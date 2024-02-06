@@ -32,6 +32,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'mdrol:admin'])->group(f
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/crearToken', [ProfileController::class, 'create_token'])->name('profile.create-token');
 
     Route::get('/dashboard', [TorneoController::class, 'index'])->name('dashboard');
     Route::get('/usuarios', [ProfileController::class, 'index'])->name('usuarios');

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\JuegoResource;
 use App\Models\Juego;
+use App\Http\Controllers\TorneoAPIController;
+
 
 
 /*
@@ -29,13 +31,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/tokens/create', function (Request $request) {
     if (!Auth::attempt($request->only('email', 'password'))) {
         return response()->json([
-          'message' => 'Unauthorized'
+            'message' => 'Unauthorized'
         ], 401);
-      }
-      return response()->json([
-        'token' => $request->user()->createToken($request->email)->plainTextToken,
+    }
+
+    return response()->json([
+        'token' => $request->user()->createToken($request->email, ['*'], now()->addWeek())->plainTextToken,
         'message' => 'Success'
-      ]);
+    ]);
 });
 
 
@@ -53,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         if (Juego::findOrFail($id)) {
             Juego::destroy($id);
             return ['message' => 'Juego deleted'];
-        } 
+        }
     });
 
     Route::post('/juegos', function (Request $request) {
@@ -63,11 +66,13 @@ Route::middleware('auth:sanctum')->group(function () {
         $juego->edadR = $request->edadR;
         $juego->nota = $request->nota;
         $juego->save();
-        return ['message' => 'Juego created',
-                'juego' => $juego];
+        return [
+            'message' => 'Juego created',
+            'juego' => $juego
+        ];
     });
+});
 
-
-}); 
-
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('torneos', TorneoAPIController::class);
+});

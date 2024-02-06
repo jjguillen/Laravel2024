@@ -13,7 +13,8 @@ use App\Models\User;
 class ProfileController extends Controller
 {
 
-    public function index(): View {
+    public function index(): View
+    {
         $usuarios = User::paginate(5);
         return view('usuarios', ['usuarios' => $usuarios]);
     }
@@ -69,9 +70,19 @@ class ProfileController extends Controller
     /**
      * Ver inscripciones del usuario logueado
      */
-    public function inscripciones() {
+    public function inscripciones()
+    {
         $user = Auth::user();
         $torneosInscrito = $user->inscripciones;
         return view('web.inscripciones', ['torneos' => $torneosInscrito]);
+    }
+
+    public function create_token()
+    {
+
+        return response()->json([
+            'token' => Auth::user()->createToken(Auth::user()->email, ['*'], now()->addWeek())->plainTextToken,
+            'message' => 'Success'
+        ]);
     }
 }
