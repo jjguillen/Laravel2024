@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\App;
 
 
 
@@ -23,7 +25,15 @@ class TorneoController extends Controller
 
     public function index_web(): View
     {
-        $torneos = Torneo::with('Juego')->whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->get();
+
+        //Cache::put('torneos', $torneos);
+        $torneos = Cache::get('torneos', function () {
+            return Torneo::with('Juego')->whereDate('fechaInicio', '>', now()->toDateString())->orderByDesc('fechaInicio')->get();
+        });
+
+        //Operaciones sobre colecciones
+        //$torneos = $torneos->where('juego_id', '=', 1);
+
         return view('web.torneos', ['torneos' => $torneos]);
     }
 
