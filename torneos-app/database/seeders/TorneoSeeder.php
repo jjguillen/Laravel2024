@@ -13,6 +13,6 @@ class TorneoSeeder extends Seeder
      */
     public function run(): void
     {
-        Torneo::factory()->count(1000)->create();
+        Torneo::factory()->count(25)->create();
     }
 }
