@@ -47,10 +47,12 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'mdrol:admin'])->group(f
 Route::prefix('gameplace')->group(function () {
     Route::get('/torneos', [TorneoController::class, 'index_web'])->name('web.torneos');
     Route::get('/torneos/{id}', [TorneoController::class, 'show'])->name('web.torneos_detalle');
+    Route::get('/torneos/borrar/{id}', [TorneoController::class, 'destroy'])->name('web.torneos_borrar');
     Route::get('/juegos', [JuegoController::class, 'index_web'])->name('web.juegos');
     Route::get('/juegos/{juego}', [JuegoController::class, 'show_web'])->name('web.juegos_detalle');
     Route::get('/inscripciones', [ProfileController::class, 'inscripciones'])->name('web.inscripciones');
-    Route::get('/inscribirse/{torneoId}', [TorneoController::class, 'inscribirse'])->name('web.inscribirse');
+    Route::get('/inscripciones/{torneoId}/{userId}', [TorneoController::class, 'borrarInscripcion'])->name('web.inscripciones_borrar');
+    Route::get('/inscribirse/{torneoId}', [TorneoController::class, 'inscribirse'])->middleware(['auth', 'verified', 'mdrol:usuario'])->name('web.inscribirse');
     Route::get('/filtrar/juego', [JuegoController::class, 'filtrar'])->name('web.filtrar_juegos');
     Route::get('/filtrar/torneo', [TorneoController::class, 'filtrar'])->name('web.filtrar_torneos');
 });

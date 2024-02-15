@@ -27,10 +27,22 @@
                 {{ route('web.inscribirse', ['torneoId' => $torneo->id]) }}
             </x-slot>
 
+            @if(Auth::user()->rol == 'admin')
+            <x-slot name='botonBorrar'>
+                Borrar
+            </x-slot>
+            <x-slot name='rutaBorrar'>
+                {{ route('web.torneos_borrar', ['id' => $torneo->id]) }}
+            </x-slot>
+            @endif
+
             <x-slot name='inscritos'>
                 @foreach($torneo->inscritos as $usuario)
                     <li>
                         {{ $usuario->email }} - {{ $usuario->pivot->nivel }}
+                        <a href="{{ route('web.inscripciones_borrar', 
+                            ['torneoId' => $torneo->id, 'userId' => $usuario->id]) }}"> borrar</a>
+
                     </li>
                 @endforeach
             </x-slot>

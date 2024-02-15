@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\App;
+use Illuminate\Auth\Access\AuthorizationException;
 
 
 
@@ -82,6 +83,18 @@ class TorneoController extends Controller
         return redirect()->route('web.torneos_detalle', [ 'id' => $torneoId]);
     }
 
+    public function borrarInscripcion($torneoId, $userId) {
+        $torneo = Torneo::find($torneoId);
+        //Solo puedes desinscribirte si la inscripción es tuya        
+        if ($userId == Auth::user()->id) {
+            $torneo->inscritos()->detach($userId);
+            return redirect()->route('web.torneos_detalle', [ 'id' => $torneoId]);
+        } else {
+            throw new AuthorizationException;
+        }
+
+    }
+
     public function filtrar(Request $request)
     {
         $filtro = $request->filtro;
@@ -90,5 +103,10 @@ class TorneoController extends Controller
                     ->get();
 
         return view('web.torneos', ['torneos' => $torneos]);
+    }
+
+    public function destroy($id) {
+        $this->authorize('delete', Torneo::class);
+        echo "Borrando ....";
     }
 }
